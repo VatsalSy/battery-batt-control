@@ -22,7 +22,7 @@
       "title": "battery control limit",
       "subtitle": "batt limit <% battery>",
       "description": "Set upper charge limit",
-      "mode": "no-view"
+      "mode": "view"
     },
     {
       "name": "battery-disable",
@@ -30,6 +30,16 @@
       "subtitle": "batt disable",
       "description": "Disable battery optimizer",
       "mode": "no-view"
+    }
+  ],
+  "preferences": [
+    {
+      "name": "customBattPath",
+      "title": "Custom Batt CLI Path",
+      "description": "Provide a custom path to the batt CLI executable if it's not in the system PATH",
+      "type": "textfield",
+      "required": false,
+      "default": ""
     }
   ],
   "dependencies": {
