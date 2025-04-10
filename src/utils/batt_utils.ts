@@ -142,7 +142,7 @@ export async function getBatteryStatus(): Promise<string> {
           // Clean up the temporary file
           try {
             unlinkSync(tempOutputFile);
-          } catch (_) {
+          } catch {
             /* ignore cleanup errors */
           }
 
@@ -158,7 +158,7 @@ export async function getBatteryStatus(): Promise<string> {
         if (existsSync(tempOutputFile)) {
           try {
             unlinkSync(tempOutputFile);
-          } catch (_) {
+          } catch {
             /* ignore cleanup errors */
           }
         }
@@ -192,7 +192,7 @@ export async function getBatteryStatus(): Promise<string> {
           // Clean up
           try {
             unlinkSync(tempOutputFile);
-          } catch (_) {
+          } catch {
             /* ignore cleanup errors */
           }
 
@@ -206,7 +206,7 @@ export async function getBatteryStatus(): Promise<string> {
         if (existsSync(tempOutputFile)) {
           try {
             unlinkSync(tempOutputFile);
-          } catch (_) {
+          } catch {
             /* ignore cleanup errors */
           }
         }
