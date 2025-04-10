@@ -1,11 +1,7 @@
-import { execSync } from "child_process";
+import { execSync } from "node:child_process";
 import { showHUD, getPreferenceValues } from "@raycast/api";
 import { battPath, confirmAlertBatt } from "./init_batt";
-import { existsSync } from "fs";
-
-interface Preferences {
-  customBattPath?: string;
-}
+import { existsSync, readFileSync, unlinkSync } from "node:fs";
 
 /**
  * Execute a batt command with optional administrator privileges
@@ -132,12 +128,11 @@ export async function getBatteryStatus(): Promise<string> {
       execSync(osascriptCmd, { encoding: 'utf8' });
       
       // Read the output from the temporary file
-      const fs = require('fs');
-      if (fs.existsSync(tempOutputFile)) {
-        const output = fs.readFileSync(tempOutputFile, 'utf8').trim();
+      if (existsSync(tempOutputFile)) {
+        const output = readFileSync(tempOutputFile, 'utf8').trim();
         
         // Clean up the temporary file
-        try { fs.unlinkSync(tempOutputFile); } catch (e) { /* ignore cleanup errors */ }
+        try { unlinkSync(tempOutputFile); } catch (e) { /* ignore cleanup errors */ }
         
         if (output && output.trim() !== "") {
           console.log(`Successfully got batt output via osascript, length: ${output.length}`);
@@ -165,12 +160,11 @@ export async function getBatteryStatus(): Promise<string> {
       await new Promise(resolve => setTimeout(resolve, 1000));
       
       // Read the output from the temporary file
-      const fs = require('fs');
-      if (fs.existsSync(tempOutputFile)) {
-        const output = fs.readFileSync(tempOutputFile, 'utf8').trim();
+      if (existsSync(tempOutputFile)) {
+        const output = readFileSync(tempOutputFile, 'utf8').trim();
         
         // Clean up
-        try { fs.unlinkSync(tempOutputFile); } catch (e) { /* ignore cleanup errors */ }
+        try { unlinkSync(tempOutputFile); } catch (e) { /* ignore cleanup errors */ }
         
         if (output && output.trim() !== "") {
           console.log(`Successfully got batt output via Terminal, length: ${output.length}`);
