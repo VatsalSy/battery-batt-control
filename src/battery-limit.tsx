@@ -10,7 +10,7 @@ export default function Command() {
   
   async function handleSubmit(values: CommandForm) {
     try {
-      const limit = parseInt(values.limit, 10);
+      const limit = Number.parseInt(values.limit, 10);
       if (isNaN(limit) || limit < 0 || limit > 100) {
         await showHUD("Error: Limit must be a number between 0 and 100");
         return;
