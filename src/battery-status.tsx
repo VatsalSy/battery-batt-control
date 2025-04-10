@@ -25,7 +25,7 @@ export default function Command() {
       await showToast({
         style: Toast.Style.Failure,
         title: "Failed to get battery status",
-        message: errorMessage.substring(0, 100)
+        message: errorMessage.substring(0, 100),
       });
     } finally {
       setIsLoading(false);
@@ -34,7 +34,7 @@ export default function Command() {
 
   useEffect(() => {
     fetchBatteryStatus();
-    
+
     // Refresh every 60 seconds
     const interval = setInterval(fetchBatteryStatus, 60000);
     return () => clearInterval(interval);

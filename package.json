@@ -1,7 +1,7 @@
 {
   "$schema": "https://www.raycast.com/schemas/extension.json",
   "name": "battery-batt-control",
-  "title": "battery-batt-control",
+  "title": "Battery-Batt-Control",
   "description": "This extension using the batt cli to control battery optimization",
   "icon": "icon-battery.png",
   "author": "vatsalsanjay",
@@ -12,21 +12,21 @@
   "commands": [
     {
       "name": "battery-status",
-      "title": "battery control status",
+      "title": "Battery Control Status",
       "subtitle": "batt status",
-      "description": "Gives the status of the batt setup ",
+      "description": "Gives the status of the batt setup",
       "mode": "view"
     },
     {
       "name": "battery-limit",
-      "title": "battery control limit",
+      "title": "Battery Control Limit",
       "subtitle": "batt limit <% battery>",
       "description": "Set upper charge limit",
       "mode": "view"
     },
     {
       "name": "battery-disable",
-      "title": "battery control disable",
+      "title": "Battery Control Disable",
       "subtitle": "batt disable",
       "description": "Disable battery optimizer",
       "mode": "no-view"

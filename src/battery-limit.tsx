@@ -7,7 +7,7 @@ interface CommandForm {
 
 export default function Command() {
   const { pop } = useNavigation();
-  
+
   async function handleSubmit(values: CommandForm) {
     try {
       const limit = Number.parseInt(values.limit, 10);
@@ -15,10 +15,10 @@ export default function Command() {
         await showHUD("Error: Limit must be a number between 0 and 100");
         return;
       }
-      
+
       await setBatteryLimit(limit);
       await showHUD(`Battery charge limit set to ${limit}%`);
-      
+
       // Return to the root view after successfully setting the limit
       pop();
     } catch (error) {

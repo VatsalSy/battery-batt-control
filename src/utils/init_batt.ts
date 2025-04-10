@@ -13,9 +13,9 @@ export function commandExists(command: string): boolean {
     return false;
   }
   try {
-    execSync(`which ${command}`, { stdio: "ignore", shell: '/bin/bash' });
+    execSync(`which ${command}`, { stdio: "ignore", shell: "/bin/bash" });
     return true;
-  } catch (error) {
+  } catch (_) {
     return false;
   }
 }
@@ -38,21 +38,17 @@ export function battPath(): string {
   // Try to get the exact path of batt
   try {
     // Try with 'which' command first
-    const battPathFromWhich = execSync("which batt", { encoding: 'utf8' }).toString().trim();
+    const battPathFromWhich = execSync("which batt", { encoding: "utf8" }).toString().trim();
     if (battPathFromWhich && existsSync(battPathFromWhich)) {
       return battPathFromWhich;
     }
-  } catch (error) {
+  } catch (_) {
     // If 'which' fails, continue to other methods
     console.log("Failed to find batt with 'which' command");
   }
 
   // Check common Homebrew paths directly
-  const commonPaths = [
-    "/opt/homebrew/bin/batt",
-    "/usr/local/bin/batt",
-    "/usr/bin/batt"
-  ];
+  const commonPaths = ["/opt/homebrew/bin/batt", "/usr/local/bin/batt", "/usr/bin/batt"];
 
   for (const path of commonPaths) {
     if (existsSync(path)) {
@@ -69,7 +65,7 @@ export async function confirmAlertBatt(): Promise<boolean> {
   try {
     battPath(); // Will throw if batt is not found
     return true;
-  } catch (error) {
+  } catch (_) {
     const options: Alert.Options = {
       title: "Batt CLI Not Found",
       message: "The batt CLI tool is required but was not found on your system.",
@@ -86,4 +82,4 @@ export async function confirmAlertBatt(): Promise<boolean> {
 
     return await confirmAlert(options);
   }
-} 
+}
