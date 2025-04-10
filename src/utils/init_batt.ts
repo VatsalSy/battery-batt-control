@@ -9,13 +9,13 @@ interface Preferences {
 // Check if a command exists in the system PATH
 export function commandExists(command: string): boolean {
   // Sanitize command to prevent command injection
-  if (!/^[a-zA-Z0-9_\-\/\.\s]+$/.test(command)) {
+  if (!/^[a-zA-Z0-9_\-/.\s]+$/.test(command)) {
     return false;
   }
   try {
     execSync(`which ${command}`, { stdio: "ignore", shell: "/bin/bash" });
     return true;
-  } catch (_) {
+  } catch {
     return false;
   }
 }
@@ -42,7 +42,7 @@ export function battPath(): string {
     if (battPathFromWhich && existsSync(battPathFromWhich)) {
       return battPathFromWhich;
     }
-  } catch (_) {
+  } catch {
     // If 'which' fails, continue to other methods
     console.log("Failed to find batt with 'which' command");
   }
@@ -65,7 +65,7 @@ export async function confirmAlertBatt(): Promise<boolean> {
   try {
     battPath(); // Will throw if batt is not found
     return true;
-  } catch (_) {
+  } catch {
     const options: Alert.Options = {
       title: "Batt CLI Not Found",
       message: "The batt CLI tool is required but was not found on your system.",
