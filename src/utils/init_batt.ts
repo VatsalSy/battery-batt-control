@@ -22,8 +22,8 @@ export function battPath(): string {
   const customPath = preferences.customBattPath?.trim();
 
   // Enhanced PATH with common directories including Homebrew paths which is likely where batt is installed
-  const PATH = "/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin";
-  process.env.PATH = PATH;
+  const customDirectories = "/opt/homebrew/bin:/usr/local/bin";
+  process.env.PATH = `${customDirectories}:${process.env.PATH || ""}`;
 
   // If custom path is provided and exists, use it
   if (customPath && existsSync(customPath)) {
