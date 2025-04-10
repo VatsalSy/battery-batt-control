@@ -49,13 +49,13 @@ The extension provides several commands to manage your battery:
 
 - **Get Battery Status**: View current battery information
 
-![status](</media/battery-batt-control-2.png>)
+![Battery Status Overview](</media/battery-batt-control-2.png>)
 
-![status](</media/battery-batt-control-3.png>)
+![Battery Status Example](</media/battery-batt-control-3.png>)
 
 - **Set Battery Limit**: Set a maximum charge percentage (0-100%)
 
-![limit](</media/battery-batt-control-4.png>)
+![Battery Charge Limit Interface](</media/battery-batt-control-4.png>)
 
 - **Disable Battery Optimization**: Turn off battery optimization features
 
