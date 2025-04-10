@@ -43,7 +43,7 @@ export default function Command() {
   // Format the battery status for better display in Raycast
   let formattedMarkdown;
   if (error) {
-    formattedMarkdown = `# Error\n\n**Error Message:** ${error}\n\n## Troubleshooting\n\n1. Make sure the batt CLI is installed\n2. Try running \`batt status\` directly in Terminal\n3. Provide a custom path in extension preferences if needed`;
+    formattedMarkdown = `# Error\n\n**Error Message:** ${error}\n\n## Troubleshooting\n\n1. Make sure the batt CLI is installed:\n   [Installation Guide](https://github.com/VatsalSy/batt)\n2. Try running \`batt status\` directly in Terminal\n3. Provide a custom path in extension preferences if needed`;
   } else {
     // Use pre-formatted text to preserve the exact formatting from the batt command
     formattedMarkdown = `# Battery Status\n\n\`\`\`\n${status}\n\`\`\``;
