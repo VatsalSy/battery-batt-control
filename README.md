@@ -1,6 +1,6 @@
 # Battery Batt Control
 
-A Raycast extension that uses the [batt CLI](https://github.com/charlie0129/batt) to control battery optimization on macOS.
+This extension is inspired by [Battery Optimizer](https://www.raycast.com/Qetesh/battery-optimizer). However, instead of using `bclm` (which is currently incompatible with macOS 15+), it uses the [batt CLI](https://github.com/charlie0129/batt) to control battery optimization on macOS.
 
 ## Features
 
@@ -11,7 +11,7 @@ A Raycast extension that uses the [batt CLI](https://github.com/charlie0129/batt
 
 ## Requirements
 
-- macOS 10.15 or later
+- macOS 15 or later
 - [Raycast](https://raycast.com/) installed
 - [batt CLI](https://github.com/charlie0129/batt) installed
 
@@ -33,6 +33,8 @@ The extension includes a preference setting that allows you to specify a custom 
 3. Enter the full path to your batt CLI executable in the "Custom Batt CLI Path" field
    - Example: `/opt/homebrew/bin/batt` or `/usr/local/bin/batt`
 
+![alt text](</media/battery-batt-control-1.png>)
+
 This is useful if:
 - The batt CLI is installed in a non-standard location
 - You have multiple versions of batt installed
@@ -43,7 +45,12 @@ This is useful if:
 The extension provides several commands to manage your battery:
 
 - **Get Battery Status**: View current battery information
+![alt text](</media/battery-batt-control-2.png>)
+![alt text](</media/battery-batt-control-3.png>)
+
 - **Set Battery Limit**: Set a maximum charge percentage (0-100%)
+![alt text](</media/battery-batt-control-4.png>)
+
 - **Disable Battery Optimization**: Turn off battery optimization features
 
 ## Technical Details
