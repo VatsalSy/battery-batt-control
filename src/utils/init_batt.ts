@@ -9,7 +9,7 @@ interface Preferences {
 // Check if a command exists in the system PATH
 export function commandExists(command: string): boolean {
   // Sanitize command to prevent command injection
-  if (!/^[a-zA-Z0-9_\-\/\.]+$/.test(command)) {
+  if (!/^[a-zA-Z0-9_\-\/\.\s]+$/.test(command)) {
     return false;
   }
   try {
@@ -25,9 +25,10 @@ export function battPath(): string {
   const preferences = getPreferenceValues<Preferences>();
   const customPath = preferences.customBattPath?.trim();
 
-  // Enhanced PATH with common directories including Homebrew paths which is likely where batt is installed
   const customDirectories = "/opt/homebrew/bin:/usr/local/bin";
-  process.env.PATH = `${customDirectories}:${process.env.PATH || ""}`;
+  if (!process.env.PATH?.includes(customDirectories)) {
+    process.env.PATH = `${customDirectories}:${process.env.PATH || ""}`;
+  }
 
   // If custom path is provided and exists, use it
   if (customPath && existsSync(customPath)) {
