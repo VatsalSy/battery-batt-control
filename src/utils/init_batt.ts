@@ -75,9 +75,7 @@ export async function confirmAlertBatt(): Promise<boolean> {
       primaryAction: {
         title: "Learn How to Install",
         onAction: () => {
-          // Open the installation instructions or GitHub repo in browser
-          // Replace with the actual URL for batt CLI
-          // execSync("open https://github.com/user/batt-cli");
+          execSync("open https://github.com/charlie0129/batt");
         },
       },
       dismissAction: {
