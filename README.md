@@ -38,6 +38,7 @@ The extension includes a preference setting that allows you to specify a custom 
 ![settings](</media/battery-batt-control-1.png>)
 
 This is useful if:
+
 - The batt CLI is installed in a non-standard location
 - You have multiple versions of batt installed
 - The automatic path detection fails to find your batt installation

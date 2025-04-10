@@ -121,26 +121,34 @@ export async function getBatteryStatus(): Promise<string> {
     try {
       console.log("Using osascript to run batt command...");
       // Create a temporary file for the output to avoid issues with Terminal output parsing
-      const tempOutputFile = `/tmp/batt_status_${Date.now()}.txt`;
-      const osascriptCmd = `/usr/bin/osascript -e 'do shell script "${battCmd} status > ${tempOutputFile} 2>&1"'`;
-      
-      // Execute the command via osascript
-      execSync(osascriptCmd, { encoding: 'utf8' });
-      
-      // Read the output from the temporary file
-      if (existsSync(tempOutputFile)) {
-        const output = readFileSync(tempOutputFile, 'utf8').trim();
+      let tempOutputFile = "";
+      try {
+        tempOutputFile = `/tmp/batt_status_${Date.now()}.txt`;
+        const osascriptCmd = `/usr/bin/osascript -e 'do shell script "${battCmd} status > ${tempOutputFile} 2>&1"'`;
         
-        // Clean up the temporary file
-        try { unlinkSync(tempOutputFile); } catch (e) { /* ignore cleanup errors */ }
+        // Execute the command via osascript
+        execSync(osascriptCmd, { encoding: 'utf8' });
         
-        if (output && output.trim() !== "") {
-          console.log(`Successfully got batt output via osascript, length: ${output.length}`);
-          return output;
+        // Read the output from the temporary file
+        if (existsSync(tempOutputFile)) {
+          const output = readFileSync(tempOutputFile, 'utf8').trim();
+          
+          // Clean up the temporary file
+          try { unlinkSync(tempOutputFile); } catch (e) { /* ignore cleanup errors */ }
+          
+          if (output && output.trim() !== "") {
+            console.log(`Successfully got batt output via osascript, length: ${output.length}`);
+            return output;
+          }
+        }
+        
+        console.log("osascript approach produced no output");
+      } finally {
+        // Ensure cleanup of the temporary file
+        if (existsSync(tempOutputFile)) {
+          try { unlinkSync(tempOutputFile); } catch (e) { /* ignore cleanup errors */ }
         }
       }
-      
-      console.log("osascript approach produced no output");
     } catch (osascriptError) {
       console.error("osascript approach failed:", 
         osascriptError instanceof Error ? osascriptError.message : String(osascriptError));
@@ -150,25 +158,33 @@ export async function getBatteryStatus(): Promise<string> {
     try {
       console.log("Trying with Terminal application via osascript...");
       // This approach will briefly flash a Terminal window but it works reliably
-      const tempOutputFile = `/tmp/batt_status_terminal_${Date.now()}.txt`;
-      const terminalCmd = `/usr/bin/osascript -e 'tell application "Terminal" to do script "${battCmd} status > ${tempOutputFile} && exit"'`;
-      
-      // Execute command via Terminal
-      execSync(terminalCmd, { encoding: 'utf8', timeout: 5000 });
-      
-      // Give Terminal a moment to complete the command and write the file
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      // Read the output from the temporary file
-      if (existsSync(tempOutputFile)) {
-        const output = readFileSync(tempOutputFile, 'utf8').trim();
+      let tempOutputFile = "";
+      try {
+        tempOutputFile = `/tmp/batt_status_terminal_${Date.now()}.txt`;
+        const terminalCmd = `/usr/bin/osascript -e 'tell application "Terminal" to do script "${battCmd} status > ${tempOutputFile} && exit"'`;
         
-        // Clean up
-        try { unlinkSync(tempOutputFile); } catch (e) { /* ignore cleanup errors */ }
+        // Execute command via Terminal
+        execSync(terminalCmd, { encoding: 'utf8', timeout: 5000 });
         
-        if (output && output.trim() !== "") {
-          console.log(`Successfully got batt output via Terminal, length: ${output.length}`);
-          return output;
+        // Give Terminal a moment to complete the command and write the file
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        
+        // Read the output from the temporary file
+        if (existsSync(tempOutputFile)) {
+          const output = readFileSync(tempOutputFile, 'utf8').trim();
+          
+          // Clean up
+          try { unlinkSync(tempOutputFile); } catch (e) { /* ignore cleanup errors */ }
+          
+          if (output && output.trim() !== "") {
+            console.log(`Successfully got batt output via Terminal, length: ${output.length}`);
+            return output;
+          }
+        }
+      } finally {
+        // Ensure cleanup of the temporary file
+        if (existsSync(tempOutputFile)) {
+          try { unlinkSync(tempOutputFile); } catch (e) { /* ignore cleanup errors */ }
         }
       }
     } catch (terminalError) {
