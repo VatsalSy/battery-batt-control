@@ -19,9 +19,11 @@ This extension is inspired by [Battery Optimizer](https://www.raycast.com/Qetesh
 
 1. Install the extension from the Raycast store
 2. Install the batt CLI using Homebrew:
+
    ```bash
    brew install batt
    ```
+
 3. Grant necessary permissions when prompted
 
 ## Configuration
