@@ -3,7 +3,7 @@
   "name": "battery-batt-control",
   "title": "battery-batt-control",
   "description": "This extension using the batt cli to control battery optimization",
-  "icon": "extension-icon.png",
+  "icon": "icon-battery.png",
   "author": "vatsalsanjay",
   "categories": [
     "System"
