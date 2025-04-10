@@ -1,4 +1,4 @@
-import { showHUD, Form, ActionPanel, Action, getPreferenceValues } from "@raycast/api";
+import { showHUD, Form, ActionPanel, Action, getPreferenceValues, useNavigation } from "@raycast/api";
 import { setBatteryLimit } from "./utils/batt_utils";
 
 interface CommandForm {
@@ -6,6 +6,8 @@ interface CommandForm {
 }
 
 export default function Command() {
+  const { pop } = useNavigation();
+  
   async function handleSubmit(values: CommandForm) {
     try {
       const limit = parseInt(values.limit, 10);
@@ -16,6 +18,9 @@ export default function Command() {
       
       await setBatteryLimit(limit);
       await showHUD(`Battery charge limit set to ${limit}%`);
+      
+      // Return to the root view after successfully setting the limit
+      pop();
     } catch (error) {
       console.error("Error setting battery limit:", error);
       const errorMessage = error instanceof Error ? error.message : String(error);
@@ -37,7 +42,6 @@ export default function Command() {
         placeholder="Enter a value between 0 and 100"
         info="Set the maximum battery charge limit as a percentage"
         defaultValue="80"
-        required
         autoFocus
       />
     </Form>
