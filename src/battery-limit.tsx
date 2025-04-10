@@ -1,4 +1,4 @@
-import { showHUD, Form, ActionPanel, Action, getPreferenceValues, useNavigation } from "@raycast/api";
+import { showHUD, Form, ActionPanel, Action, useNavigation } from "@raycast/api";
 import { setBatteryLimit } from "./utils/batt_utils";
 
 interface CommandForm {
