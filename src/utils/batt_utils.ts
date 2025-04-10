@@ -41,11 +41,11 @@ export async function executeBattCommand(
         }).toString().trim();
         
         console.log(`Direct execution successful, output length: ${output.length}`);
-      } catch (directError: any) {
+      } catch (directError: unknown) {
         // If direct execution fails, try via osascript
-        console.log(`Direct execution failed: ${directError.message}`);
-        if (directError.stderr) {
-          console.log(`stderr: ${directError.stderr.toString()}`);
+        console.log(`Direct execution failed: ${directError instanceof Error ? directError.message : String(directError)}`);
+        if (typeof directError === 'object' && directError !== null && 'stderr' in directError) {
+          console.log(`stderr: ${String((directError as any).stderr)}`);
         }
         
         try {
@@ -62,10 +62,10 @@ export async function executeBattCommand(
           }).toString().trim();
           
           console.log(`osascript execution successful, output length: ${output.length}`);
-        } catch (osaError: any) {
-          console.error(`osascript execution failed: ${osaError.message}`);
-          if (osaError.stderr) {
-            console.error(`stderr: ${osaError.stderr.toString()}`);
+        } catch (osaError: unknown) {
+          console.error(`osascript execution failed: ${osaError instanceof Error ? osaError.message : String(osaError)}`);
+          if (typeof osaError === 'object' && osaError !== null && 'stderr' in osaError) {
+            console.error(`stderr: ${String((osaError as any).stderr)}`);
           }
           
           // As a last resort, try using the system shell directly
