@@ -35,8 +35,8 @@ export default function Command() {
   useEffect(() => {
     fetchBatteryStatus();
     
-    // Refresh every 30 seconds
-    const interval = setInterval(fetchBatteryStatus, 30000);
+    // Refresh every 60 seconds
+    const interval = setInterval(fetchBatteryStatus, 60000);
     return () => clearInterval(interval);
   }, []);
 
