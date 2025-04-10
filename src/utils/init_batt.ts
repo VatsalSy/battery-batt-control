@@ -8,8 +8,12 @@ interface Preferences {
 
 // Check if a command exists in the system PATH
 export function commandExists(command: string): boolean {
+  // Sanitize command to prevent command injection
+  if (!/^[a-zA-Z0-9_\-]+$/.test(command)) {
+    return false;
+  }
   try {
-    execSync(`which ${command}`, { stdio: "ignore" });
+    execSync(`which ${command}`, { stdio: "ignore", shell: '/bin/bash' });
     return true;
   } catch (error) {
     return false;
