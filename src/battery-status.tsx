@@ -45,33 +45,8 @@ export default function Command() {
   if (error) {
     formattedMarkdown = `# Error\n\n**Error Message:** ${error}\n\n## Troubleshooting\n\n1. Make sure the batt CLI is installed\n2. Try running \`batt status\` directly in Terminal\n3. Provide a custom path in extension preferences if needed`;
   } else {
-    // Parse the status output to create a more readable format
-    // First, break it into sections based on the status output
-    const lines = status.split('\n').filter(line => line.trim() !== '');
-    
-    let formattedStatus = '';
-    let currentSection = '';
-    
-    // Process each line to create a more structured layout
-    for (const line of lines) {
-      if (line.endsWith(':')) {
-        // This is a section header
-        currentSection = line;
-        formattedStatus += `\n### ${line}\n`;
-      } else if (line.trim().startsWith('-')) {
-        // This is a bullet point
-        formattedStatus += `- ${line.trim().substring(1).trim()}\n`;
-      } else if (line.includes(':') && !line.endsWith(':')) {
-        // This is a key-value pair
-        const [key, value] = line.split(':').map(part => part.trim());
-        formattedStatus += `**${key}:** ${value}\n`;
-      } else {
-        // Regular line
-        formattedStatus += `${line}\n`;
-      }
-    }
-    
-    formattedMarkdown = `# Battery Status\n\n${formattedStatus}`;
+    // Use pre-formatted text to preserve the exact formatting from the batt command
+    formattedMarkdown = `# Battery Status\n\n\`\`\`\n${status}\n\`\`\``;
   }
 
   return (
@@ -84,7 +59,7 @@ export default function Command() {
           <Action
             title="Refresh"
             icon={Icon.ArrowClockwise}
-            onAction={fetchBatteryStatus}
+            onAction={() => fetchBatteryStatus()}
             shortcut={{ modifiers: ["cmd"], key: "r" }}
           />
         </ActionPanel>
