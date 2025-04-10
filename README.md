@@ -47,10 +47,13 @@ This is useful if:
 The extension provides several commands to manage your battery:
 
 - **Get Battery Status**: View current battery information
+
 ![alt text](</media/battery-batt-control-2.png>)
+
 ![alt text](</media/battery-batt-control-3.png>)
 
 - **Set Battery Limit**: Set a maximum charge percentage (0-100%)
+
 ![alt text](</media/battery-batt-control-4.png>)
 
 - **Disable Battery Optimization**: Turn off battery optimization features
@@ -79,4 +82,4 @@ If you encounter issues:
 1. Ensure batt CLI is properly installed and accessible in your PATH
 2. Check that you've granted necessary permissions
 3. Try restarting Raycast
-4. If the extension can't find your batt CLI, specify the custom path in the extension preferences
+4. If the extension can't find your batt CLI, specify the custom path in the extension preferences.
