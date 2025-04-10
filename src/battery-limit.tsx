@@ -40,7 +40,7 @@ export default function Command() {
         id="limit"
         title="Charge Limit"
         placeholder="Enter a value between 0 and 100"
-        info="Set the maximum battery charge limit as a percentage"
+        info="Set the maximum battery charge limit as a percentage. Only numeric values are allowed."
         defaultValue="80"
         autoFocus
       />
