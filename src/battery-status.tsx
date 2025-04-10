@@ -1,4 +1,4 @@
-import { ActionPanel, Detail, List, Action, Icon, showToast, Toast } from "@raycast/api";
+import { ActionPanel, Detail, Action, Icon, showToast, Toast } from "@raycast/api";
 import { useEffect, useState } from "react";
 import { getBatteryStatus } from "./utils/batt_utils";
 
