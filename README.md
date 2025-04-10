@@ -35,7 +35,7 @@ The extension includes a preference setting that allows you to specify a custom 
 3. Enter the full path to your batt CLI executable in the "Custom Batt CLI Path" field
    - Example: `/opt/homebrew/bin/batt` or `/usr/local/bin/batt`
 
-![alt text](</media/battery-batt-control-1.png>)
+![settings](</media/battery-batt-control-1.png>)
 
 This is useful if:
 - The batt CLI is installed in a non-standard location
@@ -48,13 +48,13 @@ The extension provides several commands to manage your battery:
 
 - **Get Battery Status**: View current battery information
 
-![alt text](</media/battery-batt-control-2.png>)
+![status](</media/battery-batt-control-2.png>)
 
-![alt text](</media/battery-batt-control-3.png>)
+![status](</media/battery-batt-control-3.png>)
 
 - **Set Battery Limit**: Set a maximum charge percentage (0-100%)
 
-![alt text](</media/battery-batt-control-4.png>)
+![limit](</media/battery-batt-control-4.png>)
 
 - **Disable Battery Optimization**: Turn off battery optimization features
 
